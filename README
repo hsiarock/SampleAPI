@@ -1,0 +1,39 @@
+
+This is general instruction for co/ci source code and how to package and run the sample program.
+
+- check out APP_client folder
+
+    svn co http://10.10.100.8/wifi/WifiUSBAPP/Android/Klono/p2p/APP_client
+
+- compile APP_client  (assume you check out code to ~/svn_projects)
+
+    cd ~/svn_projects/APP_client
+    javac src/com/keyasic/p2p/CommandProcess.java
+    javac src/com/keyasic/p2p/FindPortClient.java
+    javac src/com/keyasic/p2p/AppClient.java -classpath src
+
+- package jar file
+
+    jar cvf kcloud_APP_client.jar com/keyasic/p2p/CommandProcess.class com/keyasic/p2p/FindPortClient.class
+
+- run the sample program - AppClient.java
+
+  1. check java version
+	$ java -version
+	java version "1.7.0_79"
+	OpenJDK Runtime Environment (IcedTea 2.5.6) (7u79-2.5.6-0ubuntu1.14.04.1)
+	OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode)
+
+  2. run 
+
+	java -cp .:kcloud_APP_client.jar  com.keyasic.p2p.AppClient
+        Usage: AppClient <server IP> <UID> <User> <Passwd>
+
+        java -cp .:kcloud_APP_client.jar  com.keyasic.p2p.AppClient 60.250.208.26 
+ 
+ 3. default APP_client send 'ls' command (wrapped) in command buffer.
+    You should include the absolute path, or default to 'DCIM' always.
+
+ 4. Generate javadoc via javadoc command.  javadoc command. All document are generted under ./doc directory.
+
+     javadoc -d ~/workspace_Kcloud/p2p/APP_client/doc com.keyasic.p2p/CommandProcess.java
